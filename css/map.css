@@ -1,0 +1,27 @@
+@charset "UTF-8";
+*{
+    padding: 0;
+    margin: 0;
+}
+html {
+    font-family: "microsoft yahei";
+}
+ html, body {
+	margin  : 0;
+	padding : 0;
+	height  : 100%;
+	width   : 100%;
+}
+@media only screen and (max-width: 600px) {
+	html, body {
+		height  : 117%;
+	}
+}
+#map {
+	width    : 100%;
+	position : fixed;
+	height   : 100%;
+}  
+.modal{
+	top  : 10%;
+}
