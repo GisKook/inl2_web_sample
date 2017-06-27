@@ -13,12 +13,13 @@ function startCollecting(){
        return false;  
     } 
 	var data=lonLat.split('*')[0]+';'+lonLat.split('*')[1]+';'+orientationFlag;
-	 window.android.receiveString(data);
+	window.android.receiveString(data);
 	 //按钮禁用  
-	 $('#startCollecting').attr("disabled","disabled");
+	$('#startCollecting').attr("disabled","disabled");
 }
 //采集完成的方法，将按钮解禁
 function endCollecting(info){
-	 
 	$('#startCollecting').removeAttr("disabled");
 }
+
+

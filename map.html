@@ -1,127 +1,125 @@
 ﻿<!DOCTYPE html>
 <html>
-    <head>
-        <title>dkdh</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <link rel="stylesheet" href="css/style.mobile.css" type="text/css">
-        <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-        <link rel="stylesheet" href="css/sweetalert.css" type="text/css">
-        <link rel="stylesheet" href="css/map.css" type="text/css">	
-	<link rel="stylesheet" href="css/iosOverlay.css" type="text/css">	
+<head>
+	<title>dkdh</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<link rel="stylesheet" href="css/style.mobile.css" type="text/css">
+	<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+	<link rel="stylesheet" href="css/sweetalert.css" type="text/css">
+	<link rel="stylesheet" href="css/map.css" type="text/css">
+	<link rel="stylesheet" href="css/iosOverlay.css" type="text/css">
 	<style>
 		#orientationFlag{
- 			display: block;
-		    width: 100%;
-		    height: 34px;
-		    padding: 6px 12px;
-		    font-size: 14px;
-		    line-height: 1.42857143;
-		    color: #555;
-		    background-color: #fff;
-		    background-image: none;
-		    border: 1px solid #ccc;
-		    border-radius: 4px;
+			display: block;
+			width: 100%;
+			height: 34px;
+			padding: 6px 12px;
+			font-size: 14px;
+			line-height: 1.42857143;
+			color: #555;
+			background-color: #fff;
+			background-image: none;
+			border: 1px solid #ccc;
+			border-radius: 4px;
 		}
-		   
-	</style>	
-        <script src="js/plugins/OpenLayers.js"></script>
-        <script src="js/plugins/jquery-1.12.2.min.js"></script>
-        <script src="js/plugins/sweetalert.min.js"></script>
-        <script src="js/plugins/bootstrap.min.js"></script>
-		<script src="js/plugins/iosOverlay.js"></script>
-		<script src="js/startCollecting.js"></script>
-		<script src="js/operateData.js"></script>
-		<script src="js/common.js"></script>
-        <script>
-        $(function(){
-		  loadMap();
-		  window.Js.show()
-        })
-      
-		function successTips(){
-			iosOverlay({
-				text: "Success!",
-				duration: 2e3,
-				icon: "img/check.png"
-			});
-		}
-		//失败提示
-		function errorTips(){
-			iosOverlay({
-				text: "Error!",
-				duration: 2e3,
-				icon: "img/cross.png"
-			});
-		}	
-		
-		 		
-		function backStep(){
-			$("#lonLat").val(historyLoc);
-		}
-		function closeModal(){
-			swal({ 
-			    title: "您确定要关闭吗？", 
-			    type: "warning", 
-			    showCancelButton: true, 
-			    closeOnConfirm: false, 
-			    confirmButtonText: "关闭", 
-			    confirmButtonColor: "#ec6c62" 
-			}, function() { 
-			     // /$("#map-modal").modal("hide");
-			        location.reload(); 
-			});
-		}
-				
-		</script>
-    </head>
-    <body>
-        <div id="map"></div>
-		<div class="modal fade bs-example-modal-sm" id="map-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-		  <div class="modal-dialog modal-sm">
-			 <div class="modal-content">
-			  <div class="modal-header">
-					<button type="button" class="close" onclick="closeModal()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+
+	</style>
+	<script src="js/plugins/ol-debug.js"></script>
+	<script src="js/omap/omap.js"></script>
+	<script src="js/plugins/jquery-1.12.2.min.js"></script>
+	<script src="js/plugins/sweetalert.min.js"></script>
+	<script src="js/plugins/bootstrap.min.js"></script>
+	<script src="js/plugins/iosOverlay.js"></script>
+	<script src="js/startCollecting.js"></script>
+	<script src="js/operateData.js"></script>
+	<script src="js/mapClickHandler.js"></script>
+	<script src="js/loadMap.js.js"></script>
+	<script>
+        $(function(){})
+
+        function successTips(){
+            iosOverlay({
+                text: "Success!",
+                duration: 2e3,
+                icon: "img/check.png"
+            });
+        }
+        //失败提示
+        function errorTips(){
+            iosOverlay({
+                text: "Error!",
+                duration: 2e3,
+                icon: "img/cross.png"
+            });
+        }
+
+        function backStep(){
+            $("#lonLat").val(historyLoc);
+        }
+        function closeModal(){
+            swal({
+                title: "您确定要关闭吗？",
+                type: "warning",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                confirmButtonText: "关闭",
+                confirmButtonColor: "#ec6c62"
+            }, function() {
+                // /$("#map-modal").modal("hide");
+                location.reload();
+            });
+        }
+
+	</script>
+</head>
+<body>
+<div id="map"></div>
+<div class="modal fade bs-example-modal-sm" id="map-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" onclick="closeModal()"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 				<h4 class="modal-title" id="myModalLabel">坐标参数</h4>
-			  </div>
-			  <div class="modal-body">
+			</div>
+			<div class="modal-body">
 				<form role="form" id="myForm" autocomplete="on" >
-				  <div class="form-group">
-					<label>横纵坐标</label><a href='javascript:backStep()'>(上一点坐标)</a>
-					<input type="input" class="form-control" id="lonLat">
-				  </div>
-				  <div class="form-group">
-					<label>当前方向</label>
-					<div>
-					<select id="orientationFlag">
-						<option value="">请选择当前方向</option>
-						<option value="E">东</option>
-						<option value="W">西</option>
-						<option value="S">南</option>
-						<option value="N">北</option>
-					</select>
+					<div class="form-group">
+						<label>横纵坐标</label><a href='javascript:backStep()'>(上一点坐标)</a>
+						<input type="input" class="form-control" id="lonLat">
 					</div>
-					<!-- <input type="input" class="form-control" id="orientationFlag" style="" placeholder="请输入当前方向字母：EWSN对应东西南北"> -->
-				  </div>				  
-				  <div class="form-group">
-					<button type="button" class="btn btn-primary" onclick="selectData()">查询</button>
-					<input type="input" style="display:inline-block;width:75%" class="form-control" readonly placeholder="查询结果"  id="selectText">
-				  </div>	
-				  <div class="form-group">
-					<button type="button" class="btn btn-primary" onclick="deleteData()">删除</button>
-					<input type="input" style="display:inline-block;width:75%" class="form-control" readonly placeholder="删除结果"  id="deleteText">
-				  </div>	
+					<div class="form-group">
+						<label>当前方向</label>
+						<div>
+							<select id="orientationFlag">
+								<option value="">请选择当前方向</option>
+								<option value="E">东</option>
+								<option value="W">西</option>
+								<option value="S">南</option>
+								<option value="N">北</option>
+							</select>
+						</div>
+						<!-- <input type="input" class="form-control" id="orientationFlag" style="" placeholder="请输入当前方向字母：EWSN对应东西南北"> -->
+					</div>
+					<div class="form-group">
+						<button type="button" class="btn btn-primary" onclick="selectData()">查询</button>
+						<input type="input" style="display:inline-block;width:75%" class="form-control" readonly placeholder="查询结果"  id="selectText">
+					</div>
+					<div class="form-group">
+						<button type="button" class="btn btn-primary" onclick="deleteData()">删除</button>
+						<input type="input" style="display:inline-block;width:75%" class="form-control" readonly placeholder="删除结果"  id="deleteText">
+					</div>
 				</form>
-			  </div>
-			  <div class="modal-footer">
+			</div>
+			<div class="modal-footer">
 				<!--<button type="button" class="btn btn-primary" onclick="backStep()">上一点坐标</button>
 				--><button type="button" class="btn btn-primary" id="startCollecting" onclick="startCollecting()">开始采集</button>
 				<button type="button" class="btn btn-primary" onclick="showPoint()">显示坐标</button>
 				<button type="button" class="btn btn-primary" onclick="saveData()">保存坐标</button>
-			  </div>
 			</div>
-		  </div>
 		</div>
-    </body>
+	</div>
+</div>
+</body>
 </html>
